@@ -10,38 +10,30 @@ async function getUserId() {
   return userId;
 }
 
+async function findUserWithFavorites(userId: string) {
+  return await prisma.user.findUnique({
+    where: { externalId: userId },
+    include: { favorite: true },
+  });
+}
 
-// export async function getFavorite() {
-//   const userId = await getUserId();
-//   const user = await findUserWithFavorites(userId);
+export async function getFavorite() {
+  const userId = await getUserId();
+  const user = await findUserWithFavorites(userId);
   
-//   if (!user?.favorite) {
-//     console.warn(`User ${userId} has no favorites. Creating a new favorite.`);
+  if (!user?.favorite) {
+    console.warn(`User ${userId} has no favorites. Creating a new favorite.`);
     
 
-//     const newFavorite = await prisma.favorite.create({
-//       data: { userId: user.id }, 
-//     });
-//     return newFavorite; 
-//   }
+    const newFavorite = await prisma.favorite.create({
+      data: { userId: user.id }, 
+    });
+    return newFavorite; 
+  }
   
-//   return user.favorite;
-// }
-export async function getFavorite() {
-  const { userId } = auth();
-  if (!userId) throw new Error('No user ID found');
-  const user = await prisma.user.findUnique({
-    where: {
-      externalId: userId,
-    },
-    include: {
-      favorite: true,
-    },
-  });
-  if (!user?.favorite) throw new Error('No favorite found');
-
-  return user?.favorite;
+  return user.favorite;
 }
+
 export async function getFavoriteWithItems() {
   const userId = await getUserId();
   const user = await prisma.user.findUnique({
