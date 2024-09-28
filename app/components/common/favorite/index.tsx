@@ -8,7 +8,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { toast } from 'sonner';
 
 
@@ -17,6 +16,7 @@ import { toast } from 'sonner';
 export default function Wishlist({ favorite }: { favorite: SafeFavorite }) {
   const { isOpen, close } = useFavModal();
 console.log(favorite);
+
 
 function handleDelete(id) {
   try {
@@ -89,7 +89,7 @@ function handleDelete(id) {
                               </div>
                               <div className="flex flex-1 items-end justify-between text-sm">
                                 <div className="flex">
-                                  <button onClick={(e)=>{handleDelete(favoriteItem.id)}} type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                  <button onClick={()=>{handleDelete(favoriteItem.id)}} type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
                                     Remove
                                   </button>
                                 </div>

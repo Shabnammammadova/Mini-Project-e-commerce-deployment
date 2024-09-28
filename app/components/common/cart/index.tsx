@@ -87,7 +87,7 @@ function handleDelete(id) {
                               </div>
                               <div className="flex flex-1 items-end justify-between text-sm">
                                 <div className="flex">
-                                  <button  onClick={(e)=>{handleDelete(cartItem.id)}} type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                  <button  onClick={()=>{handleDelete(cartItem.id)}} type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
                                     Remove
                                   </button>
                                 </div>

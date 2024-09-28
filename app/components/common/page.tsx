@@ -1,7 +1,7 @@
 import React from 'react'
 import prisma from '@/lib/db';
 import { Product } from '.';
-import { Product as IProduct } from '@prisma/client';
+// import { Product as IProduct } from '@prisma/client';
 import { CreateProductDialog } from '@/app/categories/create-product';
 
 const Page = async() => {

@@ -47,7 +47,7 @@ export const Product = ({product}:{product:IProduct}) => {
         </div>
         <div className='px-4 py-1 w-72 flex items-center gap-2 bg-[#F3E6DA]'>
           <Button className='bg-black hover:bg-green-600'><Link href={`/edit?id=${product.id}&name=${product.name}&price=${product.price}&imageUrl=${product.imageUrl}`}><Pencil /></Link></Button>
-          <Button className='bg-black hover:bg-red-600' onClick={(e)=>{handleDelete(product.id)}}><Trash/></Button>
+          <Button className='bg-black hover:bg-red-600' onClick={()=>{handleDelete(product.id)}}><Trash/></Button>
         </div>
       </div>
     </div>

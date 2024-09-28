@@ -28,6 +28,7 @@ const EditProduct = () => {
     setProdCategory(category)
   };
 
+
   useEffect(() => {
     getCategory();
     getProductById();
@@ -43,6 +44,8 @@ const EditProduct = () => {
     e.preventDefault();
     const updatedProduct = await updateProduct(products);
     toast.success("Product updated successfully");
+    console.log(updatedProduct);
+    
   };
 
   console.log(products);
