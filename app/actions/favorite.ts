@@ -114,11 +114,17 @@ export async function getFavorite() {
   const user = await findUserWithFavorites(userId);
 
   if (!user) {
-    // Create a new user if no user found
     console.warn(`User ${userId} not found. Creating a new user.`);
+
+    // Create a new user, including all required fields
     const newUser = await prisma.user.create({
-      data: { externalId: userId },
+      data: { 
+        externalId: userId,
+        email: `${userId}@example.com`, // Use a valid email format
+        // Add other required fields if necessary
+      },
     });
+
     // Create a new favorite for the new user
     const newFavorite = await prisma.favorite.create({
       data: { userId: newUser.id },
@@ -128,6 +134,7 @@ export async function getFavorite() {
 
   if (!user.favorite) {
     console.warn(`User ${userId} has no favorites. Creating a new favorite.`);
+    
     const newFavorite = await prisma.favorite.create({
       data: { userId: user.id },
     });
