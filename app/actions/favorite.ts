@@ -10,12 +10,6 @@ async function getUserId() {
   return userId;
 }
 
-async function findUserWithFavorites(userId: string) {
-  return await prisma.user.findUnique({
-    where: { externalId: userId },
-    include: { favorite: true },
-  });
-}
 
 // export async function getFavorite() {
 //   const userId = await getUserId();
