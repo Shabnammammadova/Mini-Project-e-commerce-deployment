@@ -4,23 +4,24 @@ import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 import { getCategories, getProduct, updateProduct } from "../actions/product";
 import { toast } from "sonner";
+import { Category, Product } from "@prisma/client";
 
 const EditProduct = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [prodCategory,setProdCategory] = useState([])
+  const [prodCategory,setProdCategory] = useState<Category[]>([])
   const [products, setProducts] = useState({
     id: id!,
     name: "",
-    price: "",
+    price: 0,
     imageUrl: "",
-    category: "",
+    category: {id:""},
     categoryId:""
   });
 
   const getProductById = async () => {
     const product = await getProduct(id!);
-    setProducts(product);
+    setProducts(product!);
   };
 
   const getCategory = async () => {
@@ -42,7 +43,7 @@ const EditProduct = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const updatedProduct = await updateProduct(products);
+    const updatedProduct = await updateProduct(products as unknown as Product );
     toast.success("Product updated successfully");
     console.log(updatedProduct);
     
@@ -109,7 +110,7 @@ const EditProduct = () => {
                 required
               >
                 {
-                  prodCategory.map((category)=>(
+                  prodCategory.map((category:Category)=>(
                     <option key={category.id} value={category.id}>{category.name}</option>
                   ))
                 }

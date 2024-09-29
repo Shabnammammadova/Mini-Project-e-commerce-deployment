@@ -26,7 +26,7 @@ export async function getFavorite() {
     
 
     const newFavorite = await prisma.favorite.create({
-      data: { userId: user.id }, 
+      data: { userId: (user!).id }, 
     });
     return newFavorite; 
   }
