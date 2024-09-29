@@ -18,7 +18,7 @@ export default function Wishlist({ favorite }: { favorite: SafeFavorite }) {
 console.log(favorite);
 
 
-function handleDelete(id) {
+function handleDelete(id:string) {
   try {
     const promise = deleteFavorite(id).then(() => {
       console.log("Product deleted successfully.");

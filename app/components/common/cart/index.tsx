@@ -16,7 +16,7 @@ import { toast } from 'sonner';
 export default function Cart({ cart }: { cart: SafeCart }) {
   const { isOpen, close } = useCartModal();
 console.log(cart);
-function handleDelete(id) {
+function handleDelete(id:string) {
   try {
     const promise = deleteCart(id).then(() => {
       console.log("Product deleted successfully.");

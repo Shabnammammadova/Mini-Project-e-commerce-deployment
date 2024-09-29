@@ -3,6 +3,7 @@ import prisma from '@/lib/db';
 import { Product } from '.';
 // import { Product as IProduct } from '@prisma/client';
 import { CreateProductDialog } from '@/app/categories/create-product';
+import { Category, Product as IProduct } from '@prisma/client';
 
 const Page = async() => {
 const productsPromise= await prisma.product.findMany({
@@ -26,7 +27,7 @@ console.log(products);
       className="w-fit mx-auto grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-8 mb-5 mt-5"
     >
       {products.map((product) => (
-        <Product key={product.id} product={product} />
+        <Product key={product.id} product={product as IProduct & {category: Category}} />
       ))}
     </section>
    

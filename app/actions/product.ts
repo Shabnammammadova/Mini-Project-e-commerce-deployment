@@ -5,7 +5,7 @@ import { Prisma, Product } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 
-type Props = Omit<Product,'id' | 'createdAt' | 'updateAt'>
+type Props = Omit<Product,'id' | 'createdAt' | 'updatedAt' | 'inStock'>
 export async function createProduct(data:Props){
  const product = await prisma.product.create({
     data,

@@ -3,7 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Product as IProduct} from '@prisma/client'
+import { Category, Product as IProduct} from '@prisma/client'
 import { Pencil, Trash } from 'lucide-react'
 import { deleteProduct } from '@/app/actions/product'
 import { toast } from 'sonner'
@@ -11,10 +11,10 @@ import { toast } from 'sonner'
 
 
 
-export const Product = ({product}:{product:IProduct}) => {
+export const Product = ({product}:{product:IProduct & {category: Category}}) => {
 
 
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     try {
       const promise = deleteProduct(id).then(() => {
         console.log("Product deleted successfully.");
