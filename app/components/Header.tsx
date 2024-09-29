@@ -3,23 +3,11 @@ import Link from "next/link";
 import React from "react";
 
 import { UserButton } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
-import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/db";
-import { Role } from "@prisma/client";
 import { CartButton } from "./common/CartButton";
 import { FavButton } from "./common/FavButton";
 
 const Header = async () => {
-  const { userId } = auth();
-  if (!userId) return null;
-  const user = await prisma.user.findUnique({
-    where: {
-      externalId: userId,
-    },
-  });
 
-  const isAdmin = user?.role === Role.ADMIN;
   return (
     <div className="fixed z-50 w-full bg-[#F3E6DA]">
       <div className="flex items-center justify-between px-4 lg:px-10 py-6 max-w-screen-2xl mx-auto">
@@ -41,11 +29,6 @@ const Header = async () => {
           />
         </div>
         <div className="flex items-center gap-2">
-          {isAdmin && (
-            <Link href="/auth/sign-in">
-              <Button>Dashboard</Button>
-            </Link>
-          )}
           <div className=" hidden xl:block">
             <UserButton/>
           </div>
