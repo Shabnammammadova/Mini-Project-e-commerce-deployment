@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteFavorite } from '@/app/actions/favorite';
+import { alldeleteFavorite, deleteFavorite } from '@/app/actions/favorite';
 import { useFavModal } from '@/src/hooks/use-fav-modal';
 import { SafeFavorite } from '@/src/types';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
@@ -31,6 +31,7 @@ function handleDelete(id:string) {
     console.error("Failed to delete product:", error);
   }
 }
+
 
   return (
     <Dialog open={isOpen} onClose={close} className="relative z-10">
@@ -96,8 +97,10 @@ function handleDelete(id:string) {
                               </div>
                             </div>
                           </li>
+                          
                         ))}
                       </ul>
+                     
                     </div>
                   </div>
                 </div>

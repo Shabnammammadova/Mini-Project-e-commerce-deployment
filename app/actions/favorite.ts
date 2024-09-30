@@ -80,7 +80,7 @@ export async function addToFavorite({ productId, quantity }: { productId: string
   revalidatePath('/filter');
   return favoriteItem;
 }
-
+//delete
 export async function deleteFavorite(id: string) {
   const favorite = await prisma.favoriteItem.delete({
     where: { id },
@@ -88,3 +88,4 @@ export async function deleteFavorite(id: string) {
   revalidatePath('/filter');
   return favorite;
 }
+
