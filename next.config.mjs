@@ -15,6 +15,10 @@ const nextConfig = {
           {
             protocol:'https',
             hostname:'readymadeui.com'
+          },
+          {
+            protocol:'https',
+            hostname:'static.vecteezy.com'
           }
         ],
       },

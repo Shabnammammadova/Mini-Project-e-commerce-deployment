@@ -15,7 +15,7 @@ const Sort = ({ products,categories }: Props) => {
   const [sortedProducts, setSortedProducts] = useState(products);
   const [searhproduct, setSearchproduct] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [count,setCount] = useState(4)
+  const [count,setCount] = useState(3)
   const handleChange = (e: SelectChangeEvent) => {
     const selectvalue = e.target.value;
     setSorting(selectvalue);
@@ -44,7 +44,7 @@ const Sort = ({ products,categories }: Props) => {
   })
 
   const loadMore = () =>{
-    setCount(prevCount=>prevCount+4)
+    setCount(prevCount=>prevCount+3)
   }
   return (
     <>
@@ -93,7 +93,7 @@ const Sort = ({ products,categories }: Props) => {
       </div>
       <section
         id="Projects"
-        className="w-fit mx-auto grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-8 mb-5 mt-5"
+        className="w-full mx-auto grid grid-cols-1 gap-2 xl:grid-cols-3 lg:grid-cols-2 lg:gap-5 md:grid-cols-1 justify-items-center justify-center mt-10 mb-5 uppercase gap-y-20 gap-x-24 xl:gap-2"
       >
         {filteredProducts.slice(0,count).map((product) => (
           <Product

@@ -1,6 +1,8 @@
 'use client';
 
 import { deleteCart } from '@/app/actions/cart';
+import { createCheckoutSession } from '@/app/actions/checkout';
+import { Button } from '@/components/ui/button';
 import { useCartModal } from '@/src/hooks/use-cart-modal';
 import { SafeCart } from '@/src/types';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
@@ -8,7 +10,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 
 
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { toast } from 'sonner';
 
 
@@ -29,6 +31,13 @@ function handleDelete(id:string) {
     console.error("Failed to delete product:", error);
   }
 }
+
+
+const total = cart.items.reduce((acc, item) => item.product.price * item.quantity + acc, 0);
+  async function handleCheckout() {
+    const { url } = await createCheckoutSession(total);
+    window.location.assign(url as string);
+  }
 
   return (
     <Dialog open={isOpen} onClose={close} className="relative z-10">
@@ -103,16 +112,16 @@ function handleDelete(id:string) {
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p>$262.00</p>
+                    <p>${total}</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                   <div className="mt-6">
-                    <Link
-                      href="/checkout"
+                    <Button
+                      onClick={handleCheckout}
                       className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                     >
                       Checkout
-                    </Link>
+                    </Button>
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>
