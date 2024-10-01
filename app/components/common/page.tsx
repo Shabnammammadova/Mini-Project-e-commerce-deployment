@@ -1,9 +1,9 @@
 import React from 'react'
 import prisma from '@/lib/db';
-import { Product } from '.';
+// import { Product } from '.';
 // import { Product as IProduct } from '@prisma/client';
 import { CreateProductDialog } from '@/app/categories/create-product';
-import { Category, Product as IProduct, Role } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { auth } from '@clerk/nextjs/server';
 import Sort from './sort';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { alldeleteFavorite, deleteFavorite } from '@/app/actions/favorite';
+import { deleteFavorite } from '@/app/actions/favorite';
 import { useFavModal } from '@/src/hooks/use-fav-modal';
 import { SafeFavorite } from '@/src/types';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
