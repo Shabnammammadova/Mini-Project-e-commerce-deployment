@@ -3,6 +3,7 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { Category, Product as IProduct } from "@prisma/client";
 import React, { useState } from "react";
 import { Product } from ".";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   products: IProduct[];
@@ -14,7 +15,7 @@ const Sort = ({ products,categories }: Props) => {
   const [sortedProducts, setSortedProducts] = useState(products);
   const [searhproduct, setSearchproduct] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-
+  const [count,setCount] = useState(4)
   const handleChange = (e: SelectChangeEvent) => {
     const selectvalue = e.target.value;
     setSorting(selectvalue);
@@ -35,18 +36,23 @@ const Sort = ({ products,categories }: Props) => {
     setSelectedCategory(e.target.value)
   }
 
+
   const filteredProducts = sortedProducts.filter(product => {
     const categoryfiltered = product.name.toLowerCase().includes(searhproduct)
     const category = selectedCategory ? product.categoryId === selectedCategory : true
     return categoryfiltered && category
   })
+
+  const loadMore = () =>{
+    setCount(prevCount=>prevCount+4)
+  }
   return (
     <>
-  <div>
+  <div className="ml-10 flex gap-3">
   <Select
         value={sorting}
         onChange={handleChange}
-        className=" max-w-md flex mx-auto mb-4"
+        className=" max-w-[200px] flex  mb-4"
       >
         <MenuItem value=" " disabled>
           {" "}
@@ -59,14 +65,16 @@ const Sort = ({ products,categories }: Props) => {
         value={selectedCategory || ''}
         onChange={handleCategoryChange}
         displayEmpty
-        className="max-w-md flex mx-auto mb-4"
+        className="max-w-[200px] flex  mb-4"
       >
         <MenuItem value=''>All Categories</MenuItem>
         {categories.map(category => (
           <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
         ))}
       </Select>
-      <div className="flex px-4 py-3 rounded-md border-2 border-gray-200 overflow-hidden max-w-md mx-auto font-[sans-serif]">
+  
+  </div>
+  <div className="flex px-4 py-3 rounded-md border-2 border-gray-200 overflow-hidden max-w-md mx-auto font-[sans-serif]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 192.904 192.904"
@@ -83,18 +91,20 @@ const Sort = ({ products,categories }: Props) => {
           className="w-full outline-none bg-transparent text-gray-600 text-sm"
         />
       </div>
-  </div>
       <section
         id="Projects"
         className="w-fit mx-auto grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-8 mb-5 mt-5"
       >
-        {filteredProducts.map((product) => (
+        {filteredProducts.slice(0,count).map((product) => (
           <Product
             key={product.id}
             product={product as IProduct & { category: Category }}
           />
         ))}
       </section>
+     {count<filteredProducts.length &&(
+       <Button onClick={loadMore} variant="outline" className="flex items-center mx-auto mb-5 bg-[#9a8672]">Load more</Button>
+     )}
     </>
   );
 };
