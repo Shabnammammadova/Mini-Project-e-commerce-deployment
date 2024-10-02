@@ -65,7 +65,7 @@ export function CreateProductDialog({categories}:{categories:Category[]}):React.
     }
   return (
     <Dialog>
-     <div className="flex justify-center items-center">
+     <div className="mt-4 mb-4 flex justify-center items-center">
   <DialogTrigger asChild>
     <MuiButton variant="contained" className='bg-black w-[150px] text-center'>
       Add
