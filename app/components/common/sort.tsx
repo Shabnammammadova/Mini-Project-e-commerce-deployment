@@ -48,7 +48,7 @@ const Sort = ({ products,categories }: Props) => {
   }
   return (
     <>
-  <div className="ml-10 flex gap-3">
+  <div className=" ml-10 flex flex-col gap-3 sm:flex-row">
   <Select
         value={sorting}
         onChange={handleChange}
